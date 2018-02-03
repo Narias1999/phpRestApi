@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simple Crud</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Simple CRUD Example.</h1>
+  <form method="post"  name="form1" class="my-form" onsubmit="sendRequest()">
+    <input type="text" class="text-fields" name="username" autocomplete="off" placeholder="Username"><br>
+    <input type="password" class="text-fields" name="password" autocomplete="off" placeholder="Password"><br>
+    <input type="submit" id="button" class="button" value="Registrar">
+    <input type="button" class="button update" onclick="cancelUpdate()" value="Cancelar Actualizar">
+  </form>
+  <div class="table-container">
+    <table border="1" id="usersTable">
+    </table>
+  </div>
+  <script src="sweetalert2.all.min.js"></script>
+  <script src="code.js"></script>
+</body>
+</html>
