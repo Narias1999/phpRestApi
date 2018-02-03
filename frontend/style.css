@@ -17,6 +17,7 @@ h1 {
   padding: 25px;
 }
 a {
+  cursor: pointer;
   text-decoration: none;
   color: #0984e3;
 }

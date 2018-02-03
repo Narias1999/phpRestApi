@@ -6,6 +6,10 @@ let updateId = null
 let users = []
 const updateButton = document.querySelector('.update')
 const table = document.getElementById('usersTable')
+document.form1.addEventListener('submit', e => {
+  e.preventDefault()
+  sendRequest()
+})
 async function getRegisters() {
   const res = await fetch('http://localhost/restful-api/users/getAll')
   const data = await res.json()
@@ -30,7 +34,7 @@ function addRow(data) {
   const newRow = table.insertRow(1)
   newRow.insertCell(0).innerHTML = data.username
   newRow.insertCell(1).innerHTML = data.password
-  newRow.insertCell(2).innerHTML = `<a href="#" onCLick="myDelete(${data.id})">Eliminar</a> | <a href="#" onCLick="update(${data.id})">Actualizar</a>`
+  newRow.insertCell(2).innerHTML = `<a onCLick="myDelete(${data.id})">Eliminar</a> | <a onCLick="update(${data.id})">Actualizar</a>`
 }
 function update(id) {
   updateButton.classList.add('active')
@@ -52,8 +56,12 @@ function cancelUpdate() {
 async function myDelete(id) {
   const res = await fetch(`http://localhost/restful-api/users/deleteById/${id}`, { method: 'DELETE' })
   const data = await res.json()
-  if (data.status == 200) users = users.filter(e => e.id != id)
-  alert(data.message)
+  if (data.status == 200) {
+    users = users.filter(e => e.id != id)
+    swal('Excelente.', data.message, 'success')
+  } else {
+    swal('Ooops.', data.message, 'error')    
+  }
   rendered()
 }
 async function sendRequest() {
@@ -79,8 +87,7 @@ async function sendRequest() {
     data = await res.json()
   }
   if (data.status === 200) {
+    swal('Excelente', data.message, 'success')
     getRegisters()
-    document.form1.reset()
-  }
-  alert(data.message)
+  } else swal('Ooops...', data.message, 'error')
 }
